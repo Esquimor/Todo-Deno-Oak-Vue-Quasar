@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "oak": "https://deno.land/x/oak/mod.ts",
+    "zod": "https://deno.land/x/zod@v3.10.3/mod.ts",
+    "cors": "https://deno.land/x/cors@v1.2.2/mod.ts"
+  }
+}
