@@ -4,7 +4,7 @@ import { listController } from "../Controller/Controller.ts";
 export default class ListRouter extends Router {
 
   public routes(): void {
-    this._router.get('/list', (ctx) => listController.get(ctx));
+    this._router.get('/list', async (ctx) => listController.get(ctx));
      
     this._router.post('/list', async (ctx) => listController.post(ctx));
      

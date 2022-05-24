@@ -1,6 +1,6 @@
 export default class Form {
 
-  form: Object;
+  form: Object = {}
 
   protected buildForm(schema: any, formBody: any) {
     // @ts-ignore

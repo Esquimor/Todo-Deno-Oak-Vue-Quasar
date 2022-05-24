@@ -1,17 +1,12 @@
-import list from "../Data/list.ts"
 import { Context } from "oak";
 import FormCreateList from "../Form/FormCreateList.ts";
+import List from "../Models/List.ts"
+import Item from "../Models/Item.ts"
 
 export default class ListController {
-
-  private list: Object;
-
-  constructor() {
-    this.list = list;
-  }
   
-  public get(ctx: Context) {
-    ctx.response.body = this.list;
+  public async get(ctx: Context) {
+    ctx.response.body = await List.all();
   }
 
   public async post(ctx: Context) {
