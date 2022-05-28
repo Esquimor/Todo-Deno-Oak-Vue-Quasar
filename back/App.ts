@@ -1,11 +1,10 @@
 import { Application } from "oak";
 import AbsractRouter from "./Router/AbsractRouter.ts";
 import { oakCors } from "cors";
-import "./Database.ts";
 
 export default class App {
   
-  app;
+  app = new Application();
   port;
 
   constructor({
@@ -15,7 +14,6 @@ export default class App {
     port: number;
     routers: AbsractRouter[]
   }) {
-    this.app = new Application();
     this.port = port;
 
     this.app.use(oakCors());
