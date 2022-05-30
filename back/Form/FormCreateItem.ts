@@ -3,14 +3,13 @@ import { z } from "zod";
 
 export default class FormCreateItem extends Form {
 
-  constructor(formBody: any) {
+  constructor(formBody: Object) {
     super();
     const schema = z.object({
       label: z.string(),
       listId: z.string(),
       checked: z.optional(z.boolean())
     });
-    // @ts-ignore
     this.buildForm(schema, formBody)
   }
 }

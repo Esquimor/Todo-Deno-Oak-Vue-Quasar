@@ -1,9 +1,14 @@
 export default class Form {
 
-  form: Object = {}
+  form: {
+    success: boolean;
+    data: Object
+  } = {
+    success: false,
+    data: {}
+  }
 
-  protected buildForm(schema: any, formBody: any) {
-    // @ts-ignore
+  protected buildForm(schema: any, formBody: Object) {
     this.form = schema.safeParse(formBody);
   }
 
@@ -11,15 +16,13 @@ export default class Form {
     return !!this.form;
   }
 
-  public getData(): any {
+  public getData(): Object {
     if (!this.hasForm()) return {}
-    // @ts-ignore
     return this.form.data;
   }
 
   public hasSuccess(): boolean {
     if (!this.hasForm()) return false;
-    // @ts-ignore
     return this.form.success;
   }
 
