@@ -1,6 +1,7 @@
 import { Application } from "oak";
 import AbsractRouter from "./Router/AbsractRouter.ts";
 import { oakCors } from "cors";
+import ErrorHandling from "./Middleware/ErrorHandling.ts";
 
 export default class App {
   
@@ -17,6 +18,7 @@ export default class App {
     this.port = port;
 
     this.app.use(oakCors());
+    this.app.use(ErrorHandling)
     this.addRouters(routers);
     this.listen();
   }

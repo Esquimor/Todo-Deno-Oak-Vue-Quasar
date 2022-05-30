@@ -1,4 +1,4 @@
-import { Context, RouterContext } from "oak";
+import { Context, RouterContext, Status } from "oak";
 import FormCreateList from "../Form/FormCreateList.ts";
 import FormPutList from "../Form/FormPutList.ts";
 import ListDao from "../Dao/ListDao.ts";
@@ -10,8 +10,7 @@ export default {
   getById: async (ctx: RouterContext) =>  {
     const {id} = ctx.params;
     if (!id) {
-      ctx.response.body = "Error"
-      return;
+      ctx.throw(Status.InternalServerError, "Error")
     }
     const list = await ListDao.getById(id);
     ctx.response.body = list;
@@ -21,9 +20,9 @@ export default {
     const parsedBody = await body.value;
     const form = new FormCreateList(parsedBody);
     if (form.hasError()) {
-      ctx.response.body = "Error"
-      return;
+      ctx.throw(Status.InternalServerError, "Error")
     }
+    // @ts-ignore
     const newList = await ListDao.create(form.getData());
     ctx.response.body = newList;
   },
@@ -32,24 +31,23 @@ export default {
     const parsedBody = await body.value;
     const form = new FormPutList(parsedBody);
     if (form.hasError()) {
-      ctx.response.body = "Error";
-      return;
+      ctx.throw(Status.InternalServerError, "Error")
     }
     const data = form.getData();
+    // @ts-ignore
     const updatedList = await ListDao.updateById(data.listId, data);
     ctx.response.body = updatedList;
   },
   delete: async (ctx: RouterContext) => {
     const {id} = ctx.params;
     if (!id) {
-      ctx.response.body = "Error"
-      return;
+      ctx.throw(Status.InternalServerError, "Error")
     }
     try {
       await ListDao.deleteById(id);
       ctx.response.body = "Deleted";
     } catch {
-      ctx.response.body = "Error"
+      ctx.throw(Status.InternalServerError, "Error")
     }
   }
 }
